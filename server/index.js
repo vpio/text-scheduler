@@ -15,8 +15,9 @@ app.use(bodyParser.json());
 app.use(pino);
 
 app.post('/api/messages', (req, res) => {
-  res.send(JSON.stringify({ message: req.body.message }))
-  return
+  console.log(req.body.test)
+  // res.send(JSON.stringify({ message: req.body.message }))
+  // return
   res.header('Content-Type', 'application/json');
   client.messages.create({
     from: process.env.TWILIO_PHONE_NUMBER,
