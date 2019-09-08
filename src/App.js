@@ -1,8 +1,16 @@
 import React, { useState } from 'react';
+import axios from 'axios'
 
 function App() {
   const [message, setMessage] = useState('')
   const [phoneNum, setPhoneNum] = useState('')
+
+  const handleSubmit = () => {
+    axios.post('/api/messages', {
+      to: '+1' + phoneNum,
+      message: message,
+    })
+  }
 
   return (
     <div className="App">
@@ -22,7 +30,7 @@ function App() {
             onChange={(e) => setPhoneNum(e.target.value)} value={phoneNum}/>
         </label>
       </div>
-      <button>Schedule!</button>
+      <button onClick={handleSubmit}>Schedule!</button>
     </div>
   );
 }
