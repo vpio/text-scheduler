@@ -10,6 +10,7 @@
     "express-pino-logger": "^4.0.0",
     "node-cron": "^2.0.3",
     "react": "^16.9.0",
+    "react-datepicker": "^2.9.6",
     "react-dom": "^16.9.0",
     "react-scripts": "3.1.1"
   },
