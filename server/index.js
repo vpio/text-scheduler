@@ -14,8 +14,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(pino);
 
-cron.schedule('* * * * *', () => {
-  console.log('running a task every minute');
+cron.schedule('37 18 8 9 7', () => {
+  console.log('This is the time: ' + new Date());
 });
 
 app.post('/api/messages', (req, res) => {
