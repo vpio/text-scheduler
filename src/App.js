@@ -30,6 +30,14 @@ function App() {
             onChange={(e) => setPhoneNum(e.target.value)} value={phoneNum}/>
         </label>
       </div>
+      <div>
+        <label>
+          When do you want to receive your message?
+          <input
+            type='date'
+            />
+        </label>
+      </div>
       <button onClick={handleSubmit}>Schedule!</button>
     </div>
   );
