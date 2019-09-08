@@ -6,13 +6,17 @@ const client = require('twilio')(
   process.env.TWILIO_ACCOUNT_SID,
   process.env.TWILIO_AUTH_TOKEN
 );
-console.log(client)
+const cron = require('node-cron')
 const PORT = 3001
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(pino);
+
+cron.schedule('* * * * *', () => {
+  console.log('running a task every minute');
+});
 
 app.post('/api/messages', (req, res) => {
   console.log(req.body.test)
