@@ -4,6 +4,8 @@ import "react-datepicker/dist/react-datepicker.css";
 import TimePicker from 'rc-time-picker';
 import 'rc-time-picker/assets/index.css';
 import axios from 'axios'
+import './app.css';
+import {Card} from 'react-bootstrap'
 
 function formatForCron(date, time) {
   let dateInMonth = date.getDate()
@@ -41,36 +43,42 @@ function App() {
 
   return (
     <div className="App">
-      <div>
-        <label>
-          Enter your Message
-          <input
-            name='message'
-            onChange={(e) => setMessage(e.target.value)} value={message}/>
-        </label>
-      </div>
-      <div>
-        <label>
-          Enter your Phone Number
-          <input
-            name='phoneNum'
-            onChange={(e) => setPhoneNum(e.target.value)} value={phoneNum}/>
-        </label>
-      </div>
-      <div>
-        <label>
-          When do you want to receive your message?
-          <DatePicker selected={selectedDate} onChange={handleChange} />
-          <TimePicker
-            showSecond={false}
-            use12Hours={true}
-            defaultValue={null}
-            onChange={handleTime}
-            value={selectedTime}
-            />
-        </label>
-      </div>
-      <button onClick={handleSubmit}>Schedule!</button>
+      <Card bg="dark" text="white" style={{ width: '24rem', 'marginTop': '100px' }}>
+        <Card.Body>
+          <div>
+            <Card.Title>
+              Enter your Message
+            </Card.Title>
+              <input
+                name='message'
+                onChange={(e) => setMessage(e.target.value)} value={message}/>
+          </div>
+          <div>
+            <Card.Title>
+              Enter your Phone Number
+            </Card.Title>
+              <input
+                name='phoneNum'
+                onChange={(e) => setPhoneNum(e.target.value)} value={phoneNum}/>
+          </div>
+          <div>
+            <Card.Title>
+              When do you want to receive your message?
+            </Card.Title>
+              <DatePicker selected={selectedDate} onChange={handleChange} />
+              <div>
+                <TimePicker
+                  showSecond={false}
+                  use12Hours={true}
+                  defaultValue={null}
+                  onChange={handleTime}
+                  value={selectedTime}
+                  />
+              </div>  
+          </div>
+          <button onClick={handleSubmit}>Schedule!</button>
+        </Card.Body>
+      </Card>
     </div>
   );
 }
