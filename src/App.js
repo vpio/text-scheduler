@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import TimePicker from 'rc-time-picker';
@@ -22,15 +22,27 @@ function App() {
   const [phoneNum, setPhoneNum] = useState('')
   const [selectedDate, setDate] = useState(new Date())
   const [selectedTime, setSelectedTime] = useState(null)
+  const [formCompleted, setFormCompleted] = useState(false)
+
+  useEffect(() => {
+    console.log('incomplete')
+    if (message !== '' && phoneNum !== '' && selectedTime){
+      console.log('Valid!')
+      setFormCompleted(true)
+    }
+  })
 
   const handleSubmit = () => {
+    if (!formCompleted) { alert('Please Enter Valid Information to schedule your Text')
+      return;
+    }
     let cronFormatted = formatForCron(selectedDate, selectedTime)
 
     axios.post('/api/messages', {
       to: '+1' + phoneNum,
       message: message,
       selectedTime: cronFormatted,
-    })
+    }).then(() => alert('Messaged Scheduled Successfully!'))
   }
 
   const handleChange = date => {
@@ -74,41 +86,11 @@ function App() {
                   onChange={handleTime}
                   value={selectedTime}
                   />
-              </div>  
+              </div>
           </div>
           <button onClick={handleSubmit}>Schedule!</button>
         </Card.Body>
       </Card>
-      <div>
-        <label>
-          Enter your Message
-          <input
-            name='message'
-            onChange={(e) => setMessage(e.target.value)} value={message}/>
-        </label>
-      </div>
-      <div>
-        <label>
-          Enter your Phone Number
-          <input
-            name='phoneNum'
-            onChange={(e) => setPhoneNum(e.target.value)} value={phoneNum}/>
-        </label>
-      </div>
-      <div>
-        <label>
-          When do you want to receive your message?
-          <DatePicker selected={selectedDate} onChange={handleChange} />
-          <TimePicker
-            showSecond={false}
-            use12Hours={true}
-            defaultValue={null}
-            onChange={handleTime}
-            value={selectedTime}
-            />
-        </label>
-      </div>
-      <button onClick={handleSubmit}>Schedule!</button>
     </div>
   );
 }
