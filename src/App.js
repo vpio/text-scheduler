@@ -79,6 +79,36 @@ function App() {
           <button onClick={handleSubmit}>Schedule!</button>
         </Card.Body>
       </Card>
+      <div>
+        <label>
+          Enter your Message
+          <input
+            name='message'
+            onChange={(e) => setMessage(e.target.value)} value={message}/>
+        </label>
+      </div>
+      <div>
+        <label>
+          Enter your Phone Number
+          <input
+            name='phoneNum'
+            onChange={(e) => setPhoneNum(e.target.value)} value={phoneNum}/>
+        </label>
+      </div>
+      <div>
+        <label>
+          When do you want to receive your message?
+          <DatePicker selected={selectedDate} onChange={handleChange} />
+          <TimePicker
+            showSecond={false}
+            use12Hours={true}
+            defaultValue={null}
+            onChange={handleTime}
+            value={selectedTime}
+            />
+        </label>
+      </div>
+      <button onClick={handleSubmit}>Schedule!</button>
     </div>
   );
 }
